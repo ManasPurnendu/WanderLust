@@ -87,13 +87,13 @@ app.delete('/listings/:id', wrapAsync(async (req, res) =>{
     res.redirect(`/listings`);
 }));
  
-app.all("*", (req, res) => {
+app.all("/{*splat}", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
-})
+});
 
 app.use((err, req, res, next) => {
     let {statusCode = 500, message = "Something Went Wrong" } = err;
-    res.status(statusCode).send(message);
+    res.render("error.ejs");
 })
 
 app.listen(8080, ()=>{

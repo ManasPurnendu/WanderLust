@@ -1,41 +1,45 @@
 # 🏡 WanderLust
 
-A full-stack property listing web application inspired by Airbnb, built using Node.js, Express.js, MongoDB, Mongoose, EJS, and Bootstrap.
+A full-stack Airbnb-inspired property listing web application built using **Node.js, Express.js, MongoDB, Mongoose, EJS, and Bootstrap**.
 
-The project allows users to create, view, edit, and delete property listings while following RESTful architecture and server-side rendering principles. It is being developed as part of my journey in learning full-stack web development.
+WanderLust allows users to create, view, edit, and delete property listings along with adding and deleting reviews. The project follows RESTful architecture, server-side rendering, modular routing using Express Router, and MongoDB relationships with Mongoose.
 
 ---
 
-## 🚀 Features
+# 🚀 Features
 
-### Current Features
+## Current Features
 
 - Create new property listings
 - View all listings
 - View individual listing details
 - Edit existing listings
 - Delete listings
+- Add reviews to listings
+- Delete reviews
+- Nested routing using Express Router
+- Server-side validation using Joi
+- MongoDB relationships using Mongoose
+- Cascading deletion of reviews using Mongoose Middleware
 - Server-side rendering using EJS
-- RESTful routing
-- MongoDB database integration using Mongoose
-- Responsive UI built with Bootstrap 5
 - Layout management using EJS-Mate
+- Responsive UI built with Bootstrap 5
 
 ---
 
-## 🛠️ Tech Stack
+# 🛠️ Tech Stack
 
-### Backend
+## Backend
 
 - Node.js
 - Express.js
 
-### Database
+## Database
 
 - MongoDB
 - Mongoose
 
-### Frontend
+## Frontend
 
 - EJS
 - Bootstrap 5
@@ -43,7 +47,11 @@ The project allows users to create, view, edit, and delete property listings whi
 - CSS3
 - JavaScript
 
-### Development Tools
+## Validation
+
+- Joi
+
+## Development Tools
 
 - Nodemon
 - Git
@@ -51,9 +59,9 @@ The project allows users to create, view, edit, and delete property listings whi
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
-```
+```text
 Project1/
 │
 ├── init/
@@ -61,16 +69,26 @@ Project1/
 │   └── index.js
 │
 ├── models/
-│   └── listing.js
+│   ├── listing.js
+│   └── review.js
+│
+├── routes/
+│   ├── listing.js
+│   └── review.js
 │
 ├── public/
 │   └── css/
+│
+├── utils/
+│   ├── ExpressError.js
+│   └── wrapAsync.js
 │
 ├── views/
 │   ├── includes/
 │   ├── layouts/
 │   └── listings/
 │
+├── schema.js
 ├── app.js
 ├── package.json
 └── package-lock.json
@@ -78,37 +96,37 @@ Project1/
 
 ---
 
-## ⚙️ Installation
+# ⚙️ Installation
 
-### 1. Clone the repository
+## 1. Clone the repository
 
 ```bash
 git clone https://github.com/ManasPurnendu/WanderLust.git
 ```
 
-### 2. Navigate into the project
+## 2. Navigate into the project
 
 ```bash
 cd WanderLust
 ```
 
-### 3. Install dependencies
+## 3. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 4. Start MongoDB
+## 4. Start MongoDB
 
 Make sure MongoDB Community Server is running.
 
-### 5. Seed the database
+## 5. Seed the database
 
 ```bash
 node init/index.js
 ```
 
-### 6. Start the application
+## 6. Start the application
 
 ```bash
 nodemon app.js
@@ -120,7 +138,7 @@ or
 node app.js
 ```
 
-### 7. Open the browser
+## 7. Open your browser
 
 ```
 http://localhost:8080/listings
@@ -128,51 +146,56 @@ http://localhost:8080/listings
 
 ---
 
-## 📷 Screenshots
+# 📷 Screenshots
 
-Coming soon.
+Coming Soon
 
 - Home Page
 - Listing Details
 - Create Listing
 - Edit Listing
+- Review Section
 
 ---
 
-## 🎯 Future Improvements
+# 🎯 Future Improvements
 
 - User Authentication
 - Authorization
-- Reviews and Ratings
 - Cloudinary Image Uploads
-- Map Integration
+- Interactive Maps
 - Search & Filtering
 - Image Carousel
 - Wishlist Feature
 - Booking System
 - Responsive Mobile UI
-- Form Validation
 - Flash Messages
 - Deployment on Render
 
 ---
 
-## 📚 Learning Outcomes
+# 📚 Learning Outcomes
 
 This project helped me gain hands-on experience with:
 
-- RESTful API design
-- Express.js routing
-- CRUD operations
+- Express.js
+- Express Router
+- RESTful Routing
+- CRUD Operations
+- Nested Routes
+- Route Modularization
+- Middleware
+- Joi Validation
 - MongoDB & Mongoose
-- EJS templating
-- Server-side rendering
-- MVC-style project organization
-- Git & GitHub workflow
+- Mongoose Relationships
+- Mongoose Middleware (Hooks)
+- Server-side Rendering using EJS
+- MVC-style Project Organization
+- Git & GitHub Workflow
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **Manas Purnendu**
 

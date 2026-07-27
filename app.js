@@ -7,10 +7,14 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require ("./utils/ExpressErrors.js");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
 
 
 const listings = require("./routes/listing.js");//Route for Listing related pages
 const reviews = require("./routes/review.js");//Route for Review related pages
+const users = require("./routes/user.js");//Route for User related pages
 
 
 app.set("view engine","ejs");
@@ -52,14 +56,33 @@ app.get('/', (req, res)=>{
 app.use(session(sessionOptions));
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new  LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 app.use((req, res, next) =>{
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     next();
 });
 
+// app.get("/demoUser", async (req, res) => {
+//     let fakeUser = new User({
+//         email: "student@gmail.com",
+//         username: "delta-student",
+//     });
+
+//     let newUser = await User.register(fakeUser, "helloworld");
+//     res.send(newUser);
+// });
+
 app.use('/listings', listings);//Listing Route
 app.use('/listings/:id/reviews', reviews);//Review Route
+app.use('/', users);//User Route
 
 
 app.all("/{*splat}", (req, res, next) => {

@@ -6,6 +6,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require ("./utils/ExpressErrors.js");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 
 const listings = require("./routes/listing.js");//Route for Listing related pages
@@ -19,6 +20,7 @@ app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+
 const sessionOptions = {
     secret : "supersecretkey",
     resave : false,
@@ -27,6 +29,7 @@ const sessionOptions = {
     maxAge: 7*24*60*60*1000,
     httpOnly: true,
 };
+
 
 const mongo_url="mongodb://127.0.0.1:27017/wanderlust";
 
@@ -42,12 +45,18 @@ main()
     }) 
 
 
-
 app.get('/', (req, res)=>{
     res.send("Server is working");
 });
 
 app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req, res, next) =>{
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    next();
+});
 
 app.use('/listings', listings);//Listing Route
 app.use('/listings/:id/reviews', reviews);//Review Route

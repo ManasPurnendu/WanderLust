@@ -8,17 +8,15 @@ const { signUp } = require("../controllers/users.js");
 
 const userController = require("../controllers/users.js")
 
-//Render SignUp Form
-router.get("/signup", userController.renderSignupForm);
+router
+    .route("/signup")
+    .get( userController.renderSignupForm)
+    .post(wrapAsync(userController.signUp));
 
-//Sign Up 
-router.post("/signup", wrapAsync(userController.signUp));
-
-//Render Login Form
-router.get("/login", userController.renderLoginForm);
-
-//Login
-router.post("/login",redirectUrl, passport.authenticate("local", { failureRedirect: "/login", failureFlash: true}), userController.login);
+router
+    .route("/login")
+    .get(userController.renderLoginForm)
+    .post(redirectUrl, passport.authenticate("local", { failureRedirect: "/login", failureFlash: true}), userController.login);
 
 //Logout
 router.get("/logout", userController.logout);

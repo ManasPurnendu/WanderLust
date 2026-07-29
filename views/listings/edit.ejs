@@ -9,7 +9,7 @@
             <form method="POST"
                 action="/listings/<%= listing._id %>?_method=PUT"
                 novalidate
-                class="needs-validation">
+                class="needs-validation" enctype="multipart/form-data">
 
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
@@ -36,18 +36,20 @@
                         Please enter a description.
                     </div>
                 </div>
-
+                <div class="mb-3 col-md-4">
+                    <b>Original Listing Image</b>
+                    <img src="<%=originalImageUrl%>" alt="Liting image">
+                </div>
                 <div class="mb-3">
-                    <label for="image" class="form-label">Image URL</label>
+                    <label for="image" class="form-label">Upload New Image</label>
                     <input
                         name="listing[image]"
-                        type="text"
+                        type="file"
                         class="form-control"
                         value="<%= listing.image.url %>"
-                        required
                     >
                     <div class="invalid-feedback">
-                        Please provide an image URL.
+                        Please provide an image.
                     </div>
                 </div>
 

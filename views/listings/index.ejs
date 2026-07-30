@@ -1,21 +1,229 @@
-<% layout("/layouts/boilerplate.ejs") %> 
-<body>
-    <!-- <h3>All Listings</h3>
-    <form method="GET" action="/listings/new">
-        <button>Create New Listing</button>
-    </form> -->
-    <h3>All Listings</h3>
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-         <%for(let listing of allListings){ %>
-            <a href="/listings/<%= listing._id %>" class = "listing-link">
-            <div class="card col listing-card" >
-                <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
-                <div class="card-img-overlay"></div>
-                <div class="card-body">
-                    <p class="card-text"><b><%= listing.title %></b><br> &#8377 <%=listing.price.toLocaleString("en-IN")%> / Night</p>
-                </div>
-            </div>
-            </a>
-    <% } %>
+<% layout("/layouts/boilerplate.ejs") %>
+
+<style>
+    #filters {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .filter {
+        margin-top: 1.6rem;
+        text-align: center;
+        opacity: 0.7;
+        min-width: 70px;
+    }
+
+    .filter:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    .filter div {
+        height: 1.6rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .filter i {
+        font-size: 1.2rem;
+        color: #555;
+    }
+
+    .filter p {
+        font-size: 0.8rem;
+        margin-top: 0.35rem;
+        margin-bottom: 0;
+    }
+
+    .tax-info {
+        display: none;
+    }
+
+    .tax-toggle {
+        margin-left: auto;
+        margin-top: 1.5rem;
+
+        width: 360px;
+        height: 70px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border: 1px solid #cfcfcf;
+        border-radius: 1.25rem;
+        background: #fff;
+
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        transition: all 0.25s ease;
+    }
+
+    .tax-toggle:hover {
+        border-color: #999;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .tax-toggle .form-check {
+        margin: 0;
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    .tax-toggle .form-check-label {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 500;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+
+    .form-check-input {
+        cursor: pointer;
+        transform: scale(1.2);
+    }
+</style>
+
+<div id="filters">
+
+    <div class="filter">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
     </div>
-</body>
+
+    <div class="filter">
+        <div><i class="fa-solid fa-bed"></i></div>
+        <p>Rooms</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-solid fa-mountain-city"></i></div>
+        <p>Iconic Cities</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-solid fa-mountain"></i></div>
+        <p>Mountains</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-brands fa-fort-awesome"></i></div>
+        <p>Castles</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Amazing Pools</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-solid fa-campground"></i></div>
+        <p>Camping</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-solid fa-tractor"></i></div>
+        <p>Farms</p>
+    </div>
+
+    <div class="filter">
+        <div><i class="fa-regular fa-snowflake"></i></div>
+        <p>Arctic</p>
+    </div>
+
+    <div class="tax-toggle">
+        <div class="form-check form-switch">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="switchCheckDefault"
+            >
+
+            <label
+                class="form-check-label"
+                for="switchCheckDefault"
+            >
+                Display total before taxes
+            </label>
+        </div>
+    </div>
+
+</div>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+
+    <% for(let listing of allListings){ %>
+
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+
+            <div class="card col listing-card">
+
+                <img
+                    src="<%= listing.image.url %>"
+                    class="card-img-top"
+                    alt="listing_image"
+                    style="height:20rem;"
+                >
+
+                <div class="card-img-overlay"></div>
+
+                <div class="card-body">
+
+                    <p class="card-text">
+                        <b><%= listing.title %></b>
+                        <br>
+
+                        &#8377;
+                        <%= listing.price.toLocaleString("en-IN") %>
+                        / Night
+
+                        <span class="tax-info">
+                            &nbsp;&bull;&nbsp;
+                            &#8377;
+                            <%= Math.round(listing.price * 1.18).toLocaleString("en-IN") %>
+                            total
+                        </span>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    <% } %>
+
+</div>
+
+<script>
+
+    let taxSwitch = document.getElementById("switchCheckDefault");
+    let taxInfo = document.getElementsByClassName("tax-info");
+    let label = document.querySelector(".form-check-label");
+
+    taxSwitch.addEventListener("change", () => {
+
+        for (let info of taxInfo) {
+
+            if (taxSwitch.checked) {
+                info.style.display = "inline";
+                label.innerText = "Display total after taxes";
+            } else {
+                info.style.display = "none";
+                label.innerText = "Display total before taxes";
+            }
+
+        }
+
+    });
+
+</script>

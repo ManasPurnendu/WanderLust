@@ -54,9 +54,9 @@ main()
     }) 
 
 
-app.get('/', (req, res)=>{
-    res.send("Server is working");
-});
+// app.get('/', (req, res)=>{
+//     res.send("Server is working");
+// });
 
 app.use(session(sessionOptions));
 app.use(flash());

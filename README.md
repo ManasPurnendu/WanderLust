@@ -48,7 +48,7 @@ WanderLust utilizes a modern, decentralized architecture, splitting concerns acr
 graph TD;
     Client([Client Browser]) <-->|HTTP Requests/Responses| Router[Express Router]
     
-    subgraph Backend Server (MVC)
+    subgraph Backend_Server ["Backend Server (MVC)"]
         Router -->|Delegates to| Controllers[Controllers]
         Controllers -->|Business Logic| Models[(Mongoose Models)]
         Controllers -->|Renders| Views[EJS Views]

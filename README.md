@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="WanderLust Banner" width="100%" style="border-radius:15px; margin-bottom: 20px;">
+  <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="WanderLust Banner" style="width: 100%; height: 250px; object-fit: cover; border-radius: 15px; margin-bottom: 20px;">
   
   <h1>🏡 WanderLust</h1>
   <p><strong>A production-ready, highly scalable property rental platform inspired by Airbnb.</strong></p>
